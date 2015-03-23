@@ -362,7 +362,7 @@ class MatchApplication(ttk.Frame):
             self.matchTeam4.append( ttk.Label(self.tableFrame, text = matchData[6][0], style = awayStyle, anchor='center') )
             self.matchTeam5.append( ttk.Label(self.tableFrame, text = matchData[6][1], style = awayStyle, anchor='center') )
             self.matchTeam6.append( ttk.Label(self.tableFrame, text = matchData[6][2], style = awayStyle, anchor='center') )
-            self.matchGridGap.append( [ttk.Label(self.tableFrame, text = ' ', style = 'gridGaps.TLabel') for i in range(6)] )
+            self.matchGridGap.append( [ttk.Label(self.tableFrame, text = ' ', style = 'gridGaps.TLabel') for i2 in range(6)] )
 
         #place match table info
         for i in range(len(GUIMatchList)):
@@ -557,7 +557,7 @@ class MatchApplication(ttk.Frame):
         
         #Create and place add and cancel buttons in new frame
         self.addMatchButtonFrame = ttk.Frame(self.addMatchWinFrame)
-        self.addMatchButtonFrame.grid(row=4, column=1, columnspan=15, sticky=tk.E)
+        self.addMatchButtonFrame.grid(row=4, column=1, columnspan=15, sticky=(tk.E, tk.W))
         self.addMatchButton = ttk.Button(self.addMatchButtonFrame, text = 'Add Match', command = self.addMatchDo)
         self.addMatchCancel = ttk.Button(self.addMatchButtonFrame, text = 'Cancel', command = self.addMatchWindow.destroy)
         self.addMatchCancel.pack(side=tk.RIGHT, padx=5, pady=10)
@@ -741,23 +741,23 @@ class MatchApplication(ttk.Frame):
         #Create the window, frame in it, and have the frame fill the window
         self.listWindow = tk.Toplevel(self)
         self.listWinFrame = ttk.Frame(self.listWindow)
-        self.listWinFrame.grid(sticky=(tk.N+tk.S+tk.E+tk.W))
+        self.listWinFrame.grid(padx=10, sticky=(tk.N+tk.S+tk.E+tk.W))
         self.listWindow.title('Full Match List')
         self.listWindow.rowconfigure(0,weight=1)
         self.listWindow.columnconfigure(0,weight=1)
 
         #Set column stretchiness
         self.listWinFrame.columnconfigure(0, weight=1)
-        self.listWinFrame.columnconfigure(2, weight=1)
-        self.listWinFrame.columnconfigure(4, weight=1)
+        self.listWinFrame.columnconfigure(3, weight=1)
         self.listWinFrame.columnconfigure(5, weight=1)
-        self.listWinFrame.columnconfigure(7, weight=1, minsize=50)
+        self.listWinFrame.columnconfigure(6, weight=1)
         self.listWinFrame.columnconfigure(8, weight=1, minsize=50)
         self.listWinFrame.columnconfigure(9, weight=1, minsize=50)
-        self.listWinFrame.columnconfigure(11, weight=1, minsize=50)
+        self.listWinFrame.columnconfigure(10, weight=1, minsize=50)
         self.listWinFrame.columnconfigure(12, weight=1, minsize=50)
         self.listWinFrame.columnconfigure(13, weight=1, minsize=50)
-        self.listWinFrame.columnconfigure(15, weight=1)
+        self.listWinFrame.columnconfigure(14, weight=1, minsize=50)
+        self.listWinFrame.columnconfigure(16, weight=1)
 
         #Create hacky spacers
         self.fooLabelsListWin = [ttk.Label(self.listWinFrame, text = '     ') for i in range(2)]
@@ -767,22 +767,22 @@ class MatchApplication(ttk.Frame):
         self.listTimeTitle = ttk.Label(self.listWinFrame, text = 'Time', style='matchTable.TLabel', anchor='center')
         self.listWeTitle = ttk.Label(self.listWinFrame, text = 'Our Alliance', style='matchTable.TLabel', anchor='center')
         self.listTheyTitle = ttk.Label(self.listWinFrame, text = 'Their Alliance', style='matchTable.TLabel', anchor='center')
-        self.listNumberTitle.grid(row=2, column=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listTimeTitle.grid(row=2, column=4, columnspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listWeTitle.grid(row=2, column=7, columnspan=3, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listTheyTitle.grid(row=2, column=11, columnspan=3, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listNumberTitle.grid(row=2, column=3, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listTimeTitle.grid(row=2, column=5, columnspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listWeTitle.grid(row=2, column=8, columnspan=3, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listTheyTitle.grid(row=2, column=12, columnspan=3, sticky=(tk.N,tk.S,tk.E,tk.W))
         
         #Add row and column separator bars
         self.listHeaderGridGap = [( ttk.Label(self.listWinFrame, text = ' ', style = 'gridGaps.TLabel') ) for i in range(8) ]
-        self.listHeaderGridGap[0].grid(row=2, column=1, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[1].grid(row=2, column=3, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[2].grid(row=2, column=6, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[3].grid(row=2, column=10, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[4].grid(row=2, column=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[0].grid(row=2, column=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[1].grid(row=2, column=4, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[2].grid(row=2, column=7, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[3].grid(row=2, column=11, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[4].grid(row=2, column=15, sticky=(tk.N,tk.S,tk.E,tk.W))
         
-        self.listHeaderGridGap[5].grid(row=1, column=1, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[6].grid(row=3, column=1, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
-        self.listHeaderGridGap[7].grid(row=4, column=1, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[5].grid(row=1, column=2, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[6].grid(row=3, column=2, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+        self.listHeaderGridGap[7].grid(row=4, column=2, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
 
         #Create nec match table data
         GUIMatchList = self.makeGuiList(displayNum=len(self.matchList), startAtCurr=False)
@@ -801,9 +801,12 @@ class MatchApplication(ttk.Frame):
         self.listWinTeam5 = []
         self.listWinTeam6 = []
         self.listWinGridGap = []
+        self.matchIntVars = []
+        self.listCheckbuttons = []
 
         #set
         for i,matchData in enumerate(GUIMatchList):
+            
             #Set styles
             if matchData[1] == 'r':
                 homeStyle = 'redMatchTable.TLabel'
@@ -834,34 +837,45 @@ class MatchApplication(ttk.Frame):
             self.listWinTeam4.append( ttk.Label(self.listWinFrame, text = matchData[6][0], style = awayStyle, anchor='center') )
             self.listWinTeam5.append( ttk.Label(self.listWinFrame, text = matchData[6][1], style = awayStyle, anchor='center') )
             self.listWinTeam6.append( ttk.Label(self.listWinFrame, text = matchData[6][2], style = awayStyle, anchor='center') )
-            self.listWinGridGap.append( [ttk.Label(self.listWinFrame, text = ' ', style = 'gridGaps.TLabel') for i in range(6)] )
+            self.listWinGridGap.append( [ttk.Label(self.listWinFrame, text = ' ', style = 'gridGaps.TLabel') for i2 in range(6)] )
+            #Make Checkbutton elementsts
+            self.matchIntVars.append(tk.IntVar())
+            self.listCheckbuttons.append( tk.Checkbutton(self.listWinFrame, onvalue=i, offvalue=-1, variable=self.matchIntVars[i], command=self.listEnableEdit) )
+            self.matchIntVars[i].set(-1)
 
-        #place match table info
+        #place match table info and check button
         for i in range(len(GUIMatchList)):
-            self.listWinGridGap[i][0].grid(row=3*i+5, column=1, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinNumber[i].grid(row=3*i+5, column=2, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinGridGap[i][1].grid(row=3*i+5, column=3, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinInfo1[i].grid(row=3*i+5, column=4, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinInfo2[i].grid(row=3*i+6, column=4, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTime1[i].grid(row=3*i+5, column=5, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTime2[i].grid(row=3*i+6, column=5, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinGridGap[i][2].grid(row=3*i+5, column=6, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam1[i].grid(row=3*i+5, column=7, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam2[i].grid(row=3*i+5, column=8, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam3[i].grid(row=3*i+5, column=9, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinGridGap[i][3].grid(row=3*i+5, column=10, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam4[i].grid(row=3*i+5, column=11, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam5[i].grid(row=3*i+5, column=12, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinTeam6[i].grid(row=3*i+5, column=13, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinGridGap[i][4].grid(row=3*i+5, column=14, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
-            self.listWinGridGap[i][5].grid(row=3*i+7, column=1, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][0].grid(row=3*i+5, column=2, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinNumber[i].grid(row=3*i+5, column=3, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][1].grid(row=3*i+5, column=4, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinInfo1[i].grid(row=3*i+5, column=5, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinInfo2[i].grid(row=3*i+6, column=5, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTime1[i].grid(row=3*i+5, column=6, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTime2[i].grid(row=3*i+6, column=6, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][2].grid(row=3*i+5, column=7, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam1[i].grid(row=3*i+5, column=8, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam2[i].grid(row=3*i+5, column=9, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam3[i].grid(row=3*i+5, column=10, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][3].grid(row=3*i+5, column=11, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam4[i].grid(row=3*i+5, column=12, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam5[i].grid(row=3*i+5, column=13, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinTeam6[i].grid(row=3*i+5, column=14, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][4].grid(row=3*i+5, column=15, rowspan=2, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listWinGridGap[i][5].grid(row=3*i+7, column=2, columnspan=14, sticky=(tk.N,tk.S,tk.E,tk.W))
+            self.listCheckbuttons[i].grid(row=3*i+5, column=0, rowspan=2, sticky=tk.E)
+            
 
-        #make close button
+        #Make and place edit matches button in new frame
         self.listWinButtonFrame = ttk.Frame(self.listWinFrame)
-        self.listWinButtonFrame.grid(row=3*len(GUIMatchList)+8, column=1, columnspan=14, sticky=(tk.S,tk.E,tk.W))
-        self.listWinButton = ttk.Button(self.listWinButtonFrame, text = 'Close', command=self.listWindow.destroy)
-        self.listWinButton.pack(side=tk.RIGHT, padx=5, pady=10)
-        self.listWinButton.focus_set()
+        self.listWinButtonFrame.grid(row=3*len(GUIMatchList)+8, column=1, columnspan=15, sticky=(tk.S,tk.E,tk.W))
+        self.listWinEditButton = ttk.Button(self.listWinButtonFrame, text = 'Edit Match', command=self.editMatchGUI)
+        self.listWinEditButton.pack(side=tk.RIGHT, padx=5, pady=10)
+        self.listWinEditButton.configure(state='disabled') #can't press until a checkbutton has been pressed
+        
+        #make and place ok button in button frame
+        self.listWinOKButton = ttk.Button(self.listWinButtonFrame, text = 'OK', command=self.listWindow.destroy)
+        self.listWinOKButton.pack(side=tk.RIGHT, padx=5, pady=10)
+        self.listWinOKButton.focus_set()
 
         #make mark on current match
         currInd = self.findCurrentMatch()
@@ -872,7 +886,7 @@ class MatchApplication(ttk.Frame):
 
         #place hacky spacers
         self.fooLabelsListWin[0].grid(row=0, column=0)
-        self.fooLabelsListWin[1].grid(row=0, column=15)
+        self.fooLabelsListWin[1].grid(row=0, column=16)
 
         #Set row stretchiness (needed last row)
         self.listWinFrame.rowconfigure(0, weight=1)
@@ -895,6 +909,238 @@ class MatchApplication(ttk.Frame):
                 self.greenOn=True
             self.mark.grid(row=currInd*3+5, column=0, rowspan=2, sticky=(tk.E,tk.N,tk.S))
             self.listWinFrame.after(500, self.blinkMark)
+
+    def findToEdit(self):
+        """Returns index number of match to edit or None"""
+        for var in self.matchIntVars:
+            toEdit = var.get()
+            if toEdit != -1:
+                break
+            else:
+                continue
+        if toEdit == -1:
+            self.toEdit = None
+        else:
+            self.toEdit = toEdit
+    
+    def listEnableEdit(self):
+        """Toggles edit button state in list edit button"""
+        self.findToEdit()
+        if self.toEdit != None:
+            self.listWinEditButton.configure(state='normal')
+        else:
+            self.listWinEditButton.configure(state='disabled')
+
+    def deleteToEdit(self):
+        """Deletes match in matchList at self.toEdit"""
+        if self.toEdit != None:
+            self.matchList.remove(self.matchList[self.toEdit])
+##            self.matchList = [: self.toEdit] + [self.toEdit+1 :]
+        else:
+            raise TypeError #until create real error
+
+    def editMatchGUI(self):
+        """Edits selected match"""
+        #Check for intvar that's not -1 as that's the one that gets edited
+        self.findToEdit()
+        
+        #Pull match
+        matchToEdit = self.matchList[self.toEdit]
+
+        #open addMatchGUI window
+        self.addMatchGUI()
+
+        #override those inputs and window title
+        self.addMatchWindow.title('Edit Match')
+        
+        self.addMatchNumberEntry.delete(0, tk.END)
+        self.addMatchTime1.delete(0, tk.END)
+        self.addMatchTime2.delete(0, tk.END)
+        self.addMatchRedTeam1.delete(0, tk.END)
+        self.addMatchRedTeam2.delete(0, tk.END)
+        self.addMatchRedTeam3.delete(0, tk.END)
+        self.addMatchBlueTeam1.delete(0, tk.END)
+        self.addMatchBlueTeam2.delete(0, tk.END)
+        self.addMatchBlueTeam3.delete(0, tk.END)
+        
+        self.addMatchNumberEntry.insert(0, matchToEdit.number)
+        self.addMatchTime1.insert(0, toTimeString(matchToEdit.time[0]))
+        self.addMatchTime2.insert(0, toTimeString(matchToEdit.time[1]))
+        self.addMatchRedTeam1.insert(0, matchToEdit.teamsR[0])
+        self.addMatchRedTeam2.insert(0, matchToEdit.teamsR[1])
+        self.addMatchRedTeam3.insert(0, matchToEdit.teamsR[2])
+        self.addMatchBlueTeam1.insert(0, matchToEdit.teamsB[0])
+        self.addMatchBlueTeam2.insert(0, matchToEdit.teamsB[1])
+        self.addMatchBlueTeam3.insert(0, matchToEdit.teamsB[2])
+
+        self.addMatchDayDropdown.current(self.addMatchDayDropdown['values'].index(matchToEdit.day))
+
+        #toggle practice
+        if matchToEdit.ourColor == 'p':
+            self.addMatchPracticeCheck.invoke()
+
+        #add delete button
+        self.addMatchDeleteButton = ttk.Button(self.addMatchButtonFrame, text = 'Delete', command=self.checkDelete)
+        self.addMatchDeleteButton.pack(side = tk.LEFT, padx=5, pady=10)
+
+        #change addmatch button to editmatch - which will call variation on the add match
+        self.addMatchButton.configure(text = 'Edit Match', command=self.editMatchDo)
+
+    def checkDelete(self):
+        """Checks if really want to delete then does or doesn't"""
+        #Create the window, frame in it, and have the frame fill the window
+        self.deleteWindow = tk.Toplevel(self)
+        self.deleteWinFrame = ttk.Frame(self.deleteWindow)
+        self.deleteWinFrame.grid(padx=20, pady=20, sticky=(tk.N+tk.S+tk.E+tk.W))
+        self.deleteWindow.title('Confirm Delete')
+        self.deleteWindow.rowconfigure(0,weight=1)
+        self.deleteWindow.columnconfigure(0,weight=1)
+
+        #create label
+        self.deleteLabel = ttk.Label(self.deleteWinFrame, text='Are you sure you want to delete?')
+
+        #create buttons
+        def doDelete():
+            self.deleteToEdit() #delete
+            self.deleteWindow.destroy()
+            self.addMatchWindow.destroy()
+            self.listWindow.destroy() #get rid of all the stacked windows
+            self.showMatchList() #re-show list (totally hacky instead of updating 'cause I'm lazy)
+        self.deleteButton = ttk.Button(self.deleteWinFrame, text = 'Delete', command=doDelete)
+        self.delCancelButton = ttk.Button(self.deleteWinFrame, text = 'Cancel', command=self.deleteWindow.destroy)
+
+        self.deleteLabel.pack(padx=5, pady=5)
+        self.delCancelButton.pack(side=tk.RIGHT, padx=5, pady=10)
+        self.deleteButton.pack(side=tk.RIGHT, padx=5, pady=10)
+
+        #give focus
+        self.deleteWindow.focus_set()
+        self.deleteButton.focus_set()
+
+    def editMatchDo(self):
+        """Checks data, edits match, then calls add another with some edits"""
+        
+        #First, we get all the strings
+        number = self.addMatchNumberEntry.get()
+        day = self.addMatchDayDropdown.get()
+        hour = self.addMatchTime1.get()
+        minute = self.addMatchTime2.get()
+        red1 = self.addMatchRedTeam1.get()
+        red2 = self.addMatchRedTeam2.get()
+        red3 = self.addMatchRedTeam3.get()
+        blue1 = self.addMatchBlueTeam1.get()
+        blue2 = self.addMatchBlueTeam2.get()
+        blue3 = self.addMatchBlueTeam3.get()
+
+        #Then, we check that things aren't default values
+        if number == '##' and not self.practiceFlag.get():
+            self.throwError('You must enter a match number', self.addMatchWindow, self.addMatchNumberEntry, (0,2))
+            return 0
+
+        if day == '':
+            self.throwError('You must enter a day', self.addMatchWindow, self.addMatchDayDropdown)
+            return 0
+
+        if hour == 'HH':
+            self.throwError('You must enter an hour', self.addMatchWindow, self.addMatchTime1, (0,2))
+            return 0
+
+        if minute == 'MM':
+            self.throwError('You must enter a minute', self.addMatchWindow, self.addMatchTime2, (0,2))
+            return 0
+
+        if red1 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchRedTeam1, (0,3))
+            return 0
+
+        if red2 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchRedTeam2, (0,3))
+            return 0
+
+        if red3 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchRedTeam3, (0,3))
+            return 0
+
+        if blue1 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchBlueTeam1, (0,3))
+            return 0
+
+        if blue2 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchBlueTeam2, (0,3))
+            return 0
+
+        if blue3 == '###' and not self.practiceFlag.get():
+            self.throwError('You must enter all team numbers', self.addMatchWindow, self.addMatchBlueTeam3, (0,3))
+            return 0
+
+        #Then we check that values are ok for times
+        try:
+            hourInt = int(hour)
+        except: #hackily catching all the errors
+            self.throwError('Hour value must be an integer', self.addMatchWindow, self.addMatchTime1, (0, len(hour)))
+            return 0
+        
+        if hourInt < 0 or hourInt > 23: #if not a valid hour
+            self.throwError('Hour value must be between 0 and 24', self.addMatchWindow, self.addMatchTime1, (0, len(hour)))
+
+        #Now we check minute the same way
+        try:
+            minInt = int(minute)
+        except: #hackily catching all the errors
+            self.throwError('Minute value must be an integer', self.addMatchWindow, self.addMatchTime2, (0, len(minute)))
+            return 0
+        if minInt < 0 or minInt > 59: #if not a valid minute
+            self.throwError('Minute value must be between 0 and 60', self.addMatchWindow, self.addMatchTime2, (0, len(minute)))
+            return 0
+        
+        #Check if our team has been entered
+        if not TEAM_NUM in [red1, red2, red3, blue1, blue2, blue3] and not self.practiceFlag.get():
+            self.throwError('Our team number was not entered', self.addMatchWindow, self.addMatchRedTeam1, (0,len(red1)))
+            return 0
+
+        #Everything else stays as strings, so that's fine
+        #And now we actually edit the match by deleting and re-adding
+        self.deleteToEdit()
+        self.addMatch(number, day, (hourInt, minInt), [red1, red2, red3], [blue1, blue2, blue3], practice=bool(self.practiceFlag.get()))
+
+        #And, because nothing went wrong, we tell people we added the match
+        self.addMatchWindow.destroy() #destroy current window
+        self.showEdited(number, day,(hourInt, minInt), [red1, red2, red3], [blue1, blue2, blue3])
+
+    def showEdited(self, number, day, time, teamsr, teamsb):
+        """Tells edited match"""
+        
+        #Create the window, frame in it, and have the frame fill the window
+        self.editedWindow = tk.Toplevel(self)
+        self.editedWinFrame = ttk.Frame(self.editedWindow)
+        self.editedWinFrame.grid(padx=20, pady=20, sticky=(tk.N+tk.S+tk.E+tk.W))
+        self.editedWindow.title('Success')
+
+        #Create string
+        if self.practiceFlag.get():
+            infoString = 'Successfully edited practice match for ' + day + ' at ' + toTimeString(time[0]) + ':' + toTimeString(time[1])
+        else:
+            infoString = 'Successfully edited match:\n\n'# #' + number + ' on ' + day + ' at '
+            infoString = infoString + '#' + number + ': ' + day + ' at '
+            infoString = infoString + toTimeString(time[0]) + ':' + toTimeString(time[1]) + '.  '
+            infoString = infoString + 'Red teams: ' + teamsr[0] + ', ' + teamsr[1] + ', ' + teamsr[2] + '.  '
+            infoString = infoString + 'Blue teams: ' + teamsb[0] + ', ' + teamsb[1] + ', ' + teamsb[2] + '.'
+
+        #Display info just added
+        self.editedInfoLabel = ttk.Label(self.editedWinFrame, text = infoString)
+        self.editedInfoLabel.pack(padx=5, pady=5)
+
+        #Make and place button
+        def doneEditing():
+            self.editedWindow.destroy()
+            self.listWindow.destroy() #get rid of all the stacked windows
+            self.showMatchList() #re-show list (totally hacky instead of updating 'cause I'm lazy)
+        self.editedButton = ttk.Button(self.editedWinFrame, text = 'OK', command = doneEditing)
+        self.editedButton.pack(side=tk.RIGHT, padx=5, pady=10)
+
+        #Because almost always going to be adding more than one, give focus there
+        self.editedWindow.focus_set()
+        self.editedButton.focus_set()
 
 
 
