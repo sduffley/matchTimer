@@ -470,7 +470,7 @@ class MatchApplication(ttk.Frame):
         #Create the window, frame in it, and have the frame fill the window
         self.addMatchWindow = tk.Toplevel(self)
         self.addMatchWinFrame = ttk.Frame(self.addMatchWindow)
-        self.addMatchWinFrame.grid(sticky=(tk.N+tk.S+tk.E+tk.W))
+        self.addMatchWinFrame.grid(padx=10, pady=10, sticky=(tk.N+tk.S+tk.E+tk.W))
         self.addMatchWindow.title('Add Match')
 
         #Add bullshit content to get padding
@@ -536,6 +536,9 @@ class MatchApplication(ttk.Frame):
                 self.addMatchBlueTeam1.grid_remove()
                 self.addMatchBlueTeam2.grid_remove()
                 self.addMatchBlueTeam3.grid_remove()
+                self.fooLabelsMatchWin[0].grid_remove()
+                self.fooLabelsMatchWin[2].grid_remove()
+                self.fooLabelsMatchWin[3].grid_remove()
                 self.addMatchPracticeFrame.grid(columnspan=7)
                 self.addMatchButtonFrame.grid(columnspan=7)
             else:
@@ -549,9 +552,12 @@ class MatchApplication(ttk.Frame):
                 self.addMatchBlueTeam1.grid()
                 self.addMatchBlueTeam2.grid()
                 self.addMatchBlueTeam3.grid()
+                self.fooLabelsMatchWin[0].grid()
+                self.fooLabelsMatchWin[2].grid()
+                self.fooLabelsMatchWin[3].grid()
                 self.addMatchPracticeFrame.grid(columnspan=15)
                 self.addMatchButtonFrame.grid(columnspan=15)
-        self.addMatchPracticeCheck = tk.Checkbutton(self.addMatchPracticeFrame, text='Practice Match', onvalue=1, offvalue=0, variable=self.practiceFlag, command=removeData)
+        self.addMatchPracticeCheck = tk.Checkbutton(self.addMatchPracticeFrame, text='Practice Field', onvalue=1, offvalue=0, variable=self.practiceFlag, command=removeData)
         self.addMatchPracticeCheck.pack(side=tk.RIGHT, padx=5, pady=20)
         self.practiceFlag.set(0)
         
@@ -564,12 +570,10 @@ class MatchApplication(ttk.Frame):
         self.addMatchButton.pack(side=tk.RIGHT, padx=5, pady=10)
 
         #Place hacky/bullshit content for padding
-        self.fooLabelsMatchWin[0].grid(row=0, column=0, padx=5, pady=5)
-        self.fooLabelsMatchWin[1].grid(row=0, column=2, padx=5, pady=5)
-        self.fooLabelsMatchWin[2].grid(row=0, column=4, padx=5, pady=5)
-        self.fooLabelsMatchWin[3].grid(row=0, column=8, padx=5, pady=5)
-        self.fooLabelsMatchWin[4].grid(row=0, column=12, padx=5, pady=5)
-        self.fooLabelsMatchWin[5].grid(row=0, column=16, padx=5, pady=5)
+        self.fooLabelsMatchWin[0].grid(row=0, column=2, padx=5)
+        self.fooLabelsMatchWin[1].grid(row=0, column=4, padx=5)
+        self.fooLabelsMatchWin[2].grid(row=0, column=8, padx=5)
+        self.fooLabelsMatchWin[3].grid(row=0, column=12, padx=5)
 
         #Add defaults
         self.addMatchNumberEntry.insert(0, '##')
