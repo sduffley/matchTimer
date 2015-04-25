@@ -3,6 +3,8 @@ import datetime
 import Tkinter as tk
 import ttk
 import tkMessageBox as box
+import tkFileDialog as fileBox
+import pickle
 
 #Globals
 DELAY = 0
@@ -102,7 +104,11 @@ class Match():
             ourNums = self.teamsB
             theirNums = self.teamsR
 
-        estimatedMatchTime = addDelay(self.time)
+        #check for if practice and add delay or not
+        if self.ourColor != 'p':
+            estimatedMatchTime = addDelay(self.time)
+        else:
+            estimatedMatchTime = self.time
 
         return self.number, self.ourColor, self.day, self.time, estimatedMatchTime, ourNums, theirNums
 
@@ -120,8 +126,9 @@ class Match():
         minutes = (tot_secs_till-hours*3600)/60
         seconds = tot_secs_till-hours*3600-minutes*60
 
-        #add the delay in
-        hours, minutes = addDelay((hours, minutes))
+        #add the delay in, but only if not a practice match
+        if self.ourColor != 'p':
+            hours, minutes = addDelay((hours, minutes))
 
         return hours, minutes, seconds
         
@@ -881,6 +888,14 @@ class MatchApplication(ttk.Frame):
         self.listWinOKButton.pack(side=tk.RIGHT, padx=5, pady=10)
         self.listWinOKButton.focus_set()
 
+        #make and place load button
+        self.listWinLoadButton = ttk.Button(self.listWinButtonFrame, text = 'Load Match List', command=self.loadMatchList)
+        self.listWinLoadButton.pack(side=tk.LEFT, padx=5, pady=10)
+
+        #make and place save button
+        self.listWinSaveButton = ttk.Button(self.listWinButtonFrame, text = 'Save Match List', command=self.saveMatchList)
+        self.listWinSaveButton.pack(side=tk.LEFT, padx=5, pady=10)
+        
         #make mark on current match
         currInd = self.findCurrentMatch()
         if currInd != None:
@@ -939,9 +954,56 @@ class MatchApplication(ttk.Frame):
         """Deletes match in matchList at self.toEdit"""
         if self.toEdit != None:
             self.matchList.remove(self.matchList[self.toEdit])
-##            self.matchList = [: self.toEdit] + [self.toEdit+1 :]
         else:
             raise TypeError #until create real error
+
+    def saveMatchList(self):
+        """Saves match list with tkFileDialog"""
+
+        #supported file formats:
+        matchListFormats = [
+            ('Match List', '.mlist'),
+            ('Comma Separated Value', '.csv')]
+
+        #get file name from tkFileDialog
+        fname = fileBox.asksaveasfilename(parent=self.listWindow, filetypes=matchListFormats, defaultextension='.mlist')
+
+        #if canceled, just exit
+        if fname == '':
+            return 0
+
+        #save file. Currently just pickles, will handle csv's later
+        with open(fname,'w') as f:
+            pickle.dump(self.matchList, f)
+
+    def loadMatchList(self):
+        """Loads match list with tkFileDialog"""
+
+        #supported file formats:
+        matchListFormats = [
+            ('Match List', '.mlist'),
+            ('Comma Separated Value', '.csv')]
+
+        #get file name from tkFileDialog
+        fname = fileBox.askopenfilename(parent=self.listWindow, filetypes=matchListFormats, defaultextension='.mlist')
+
+        #if canceled, just exit
+        if fname == '':
+            return 0
+
+        #save file. Currently just pickles, will handle csv's later
+        with open(fname) as f:
+            listToAdd = pickle.load(f)
+
+        #add the matches to the list, then sort
+        for match in listToAdd:
+            self.matchList.append(match)
+        self.matchList.sort(key=lambda match: match.getTimeTill())
+
+        #hackily kill existing list window and redisplay to update
+        self.listWindow.destroy() 
+        self.showMatchList() 
+
 
     def editMatchGUI(self):
         """Edits selected match"""
